@@ -9,3 +9,5 @@ Literature review: https://docs.google.com/spreadsheets/d/1XmKb3Y8ZCc86PafjhliOk
 Competitive Analysis: https://docs.google.com/spreadsheets/d/17O5K8xt_hWa0p3Ax9A8dFv1gX3TlHYmQRDwPtqxkXnk/edit?usp=sharing
 
 Personas: https://docs.google.com/spreadsheets/d/1GLsZ7GBwOy2E0-jf8i-qCoOUJQ-sMmElVsnip_UJgNY/edit?usp=sharing
+
+Style guide: https://docs.google.com/document/d/1mjGEosmYLq87A_REeZbGqUU7xqcF_yNBesw22b98oSc/edit?tab=t.0
