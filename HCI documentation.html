@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VRINGO</title>
+  <meta name="author" content="Barascu Bianca, Marin Andrei-Vasile, Sorohan Dumitrita">
+  <meta name="description" content="HCI project documentation for VRINGO, a mixed reality enhanced grocery shopping assistant">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+  <style>
+    /* Core scholarly HTML styling */
+    :root {
+      --primary-color: #3366CC;
+      --secondary-color: #FF9900;
+      --accent-color: #66CC99;
+      --text-color: #333333;
+      --light-bg: #F5F5F5;
+      --font-main: 'Roboto', sans-serif;
+      --font-headings: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      font-family: var(--font-main);
+      line-height: 1.6;
+      color: var(--text-color);
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2em;
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 2em;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1em;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-headings);
+      color: var(--primary-color);
+      margin-top: 1.5em;
+    }
+    
+    h1 {
+      font-size: 2.2em;
+      text-align: center;
+    }
+    
+    h2 {
+      font-size: 1.8em;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.3em;
+    }
+    
+    h3 {
+      font-size: 1.5em;
+    }
+    
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    
+    a:hover {
+      text-decoration: underline;
+    }
+    
+    figure {
+      margin: 2em 0;
+      text-align: center;
+    }
+    
+    figcaption {
+      font-style: italic;
+      margin-top: 0.5em;
+      color: #666;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2em 0;
+    }
+    
+    th, td {
+      padding: 0.75em;
+      border: 1px solid #ddd;
+    }
+    
+    th {
+      background-color: var(--light-bg);
+      text-align: left;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    
+    section {
+      margin-bottom: 2em;
+    }
+    
+    .abstract {
+      font-style: italic;
+      margin: 1em 0 2em;
+      padding: 1em;
+      background-color: var(--light-bg);
+      border-left: 4px solid var(--primary-color);
+    }
+    
+    .keywords {
+      margin: 1em 0;
+    }
+    
+    .bibliography {
+      margin-top: 2em;
+      padding-top: 1em;
+      border-top: 1px solid #eee;
+    }
+    
+    .bibliography li {
+      margin-bottom: 1em;
+    }
+    
+    code {
+      background-color: #f0f0f0;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    
+    /* Custom styling for project elements */
+    .persona-card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 1.5em;
+      margin-bottom: 2em;
+      background-color: #fafafa;
+    }
+    
+    .persona-card h3 {
+      margin-top: 0;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.5em;
+    }
+    
+    .style-guide {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5em;
+      margin: 2em 0;
+    }
+    
+    .color-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.8em;
+      margin-right: 1em;
+    }
+    
+    .img-container {
+      max-width: 100%;
+      margin: 2em 0;
+    }
+    
+    .img-container img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+    }
+    
+    .col-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2em;
+    }
+    
+    @media (max-width: 768px) {
+      .col-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .methodology-card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 1.5em;
+      margin-bottom: 1em;
+      background-color: #fafafa;
+    }
+    
+    .font-example {
+      margin: 1em 0;
+    }
+    
+    .prototype-section {
+      margin: 3em 0;
+    }
+    
+    .icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      margin: 1em 0;
+    }
+    
+    .icon-item {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+    }
+  </style>
+  <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://w3c.github.io/scholarly-html/css/scholarly.min.css">
+  <script src="https://w3c.github.io/scholarly-html/js/scholarly.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1>VRINGO</h1>
+    <div class="authors">
+      <div class="author">Barascu Bianca, Marin Andrei-Vasile, Sorohan Dumitrita</div>
+    </div>
+  </header>
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <div class="abstract">
+      <p>VRINGO is an innovative mixed reality (MR) enhanced shopping assistant designed to help busy parents efficiently manage grocery shopping with minimal time investment. This project combines mobile application technology with mixed reality capabilities to create a seamless shopping experience. The system connects to grocery delivery services like Bringo while providing real-time information about store inventory and shopping assistants. The MR component allows users to visualize products in 3D/AR along with relevant nutritional information and alternatives. This documentation outlines the design methodology, interaction patterns, user personas, and interface prototypes that form the VRINGO system.</p>
+    </div>
+    <div class="keywords">
+      <strong>Keywords:</strong> Mixed Reality, Human-Computer Interaction, Grocery Shopping, Mobile Application, User Experience Design, Augmented Reality
+    </div>
+  </section>
+
+  <section id="introduction">
+    <h2>Introduction</h2>
+    <p>Modern families, particularly parents with young children, often struggle to balance professional responsibilities with household management tasks like grocery shopping. Traditional grocery shopping methods require significant time investment, while existing delivery apps lack personalization and real-time product verification capabilities.</p>
+    
+    <p>VRINGO addresses these challenges by creating a dual-platform solution:</p>
+    <ul>
+      <li>A <strong>mobile application</strong> that connects to shopping services like Bringo</li>
+      <li>A <strong>mixed reality (MR) headset application</strong> that enhances the shopping experience with 3D visualization and detailed product information</li>
+    </ul>
+    
+    <p>The system enables busy parents to efficiently manage household provisions while maintaining control over product selection quality, without the time commitment of physical shopping. The MR component adds a layer of information and interactivity that is not possible with traditional shopping applications.</p>
+    
+    <p>This documentation outlines the research methodology, design principles, user personas, interaction patterns, and technical specifications of the VRINGO system.</p>
+  </section>
+
+  <section id="methodology">
+    <h2>Research Methodology</h2>
+    <p>The VRINGO project was informed by multiple research methodologies to ensure a user-centered design approach:</p>
+    
+    <div class="methodology-card">
+      <h3>Literature Review</h3>
+      <p>A comprehensive literature review was conducted to understand current trends in online grocery shopping behavior and mixed reality shopping applications. Key resources included Mercatus research on shopping behavior and academic papers on mixed reality in e-commerce contexts.</p>
+    </div>
+    
+    <div class="methodology-card">
+      <h3>Competitor Analysis</h3>
+      <p>An in-depth analysis of existing grocery delivery platforms in the Romanian market was performed, focusing on four main competitors:</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Criteria</th>
+            <th>Bringo</th>
+            <th>Glovo</th>
+            <th>Tazz</th>
+            <th>Bolt</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Geographic Coverage</td>
+            <td>Large and medium cities, limited coverage</td>
+            <td>Leader, present in 75+ Romanian cities</td>
+            <td>Major cities, expanding</td>
+            <td>Major urban centers, more limited than Glovo</td>
+          </tr>
+          <tr>
+            <td>Merchant Variety</td>
+            <td>Predominantly Carrefour supermarkets, pharmacies, pet shops</td>
+            <td>Highly diversified: restaurants, supermarkets, florists, gifts</td>
+            <td>Restaurants, supermarkets, integration with eMAG</td>
+            <td>Mostly restaurants and fast food, more limited range</td>
+          </tr>
+          <tr>
+            <td>Delivery Time</td>
+            <td>~120 minutes for supermarket orders</td>
+            <td>30-60 minutes depending on distance</td>
+            <td>30-60 minutes, variable</td>
+            <td>30-45 minutes, optimized for delivery speed</td>
+          </tr>
+          <tr>
+            <td>Order Customization</td>
+            <td>Real-time modification through communication with delivery person</td>
+            <td>Limited customization options</td>
+            <td>Allows delivery instructions and orders</td>
+            <td>Standard customization options</td>
+          </tr>
+          <tr>
+            <td>Ecosystem Integration</td>
+            <td>Part of the Carrefour ecosystem</td>
+            <td>Independent application with own store (Glovo Express)</td>
+            <td>Integration with eMAG and Genius system</td>
+            <td>Part of the Bolt ecosystem (transport, delivery)</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <p>The analysis identified key strengths and weaknesses in current offerings:</p>
+      <ul>
+        <li><strong>Strengths to incorporate:</strong> Real-time communication with shoppers (Bringo), wide merchant variety (Glovo), ecosystem integration (Tazz, Bolt)</li>
+        <li><strong>Gaps to address:</strong> Limited product visualization, lack of nutritional information standardization, inconsistent stock updates, and limited personalization</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="user-personas">
+    <h2>User Personas</h2>
+    <p>Three detailed personas were developed based on research to represent the primary user types for the VRINGO system:</p>
+    
+    <div class="persona-card">
+      <h3>Elena - The Busy Working Mother</h3>
+      <div class="col-2">
+        <div>
+          <h4>Demographics:</h4>
+          <ul>
+            <li><strong>Age:</strong> 43 (Born: 08-03-1980)</li>
+            <li><strong>Gender:</strong> Female</li>
+            <li><strong>Location:</strong> Iasi, Codrescu Campus</li>
+            <li><strong>Occupation:</strong> Software Developer at Palas Campus</li>
+            <li><strong>Education:</strong> Master's in Information Systems, Iasi</li>
+            <li><strong>Technology Level:</strong> Advanced</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Psychographics:</h4>
+          <p>Elena is a caring mother focused on her family's wellbeing. She works 8-9 hours daily, plus commute time. Due to her busy schedule, she relies on her mother-in-law to help with childcare when she and her husband are at work.</p>
+          
+          <h4>Goals:</h4>
+          <p>Prioritizing her family, Elena wants to ensure everyone has everything they need, including fresh food and other necessities, while balancing her professional responsibilities.</p>
+          
+          <h4>Frustrations:</h4>
+          <p>Her biggest frustration with current delivery services is that couriers don't always verify product quality, which is particularly important for fresh groceries.</p>
+        </div>
+      </div>
+      <h4>Scenario:</h4>
+      <p>After work, Elena can't go shopping physically because she knows her mother-in-law is exhausted from looking after her energetic child. She needs an intelligent application that can show her the condition of products before purchase, including expiration dates and freshness indicators.</p>
+    </div>
+    
+    <div class="persona-card">
+      <h3>Liviu - The Time-Conscious Father</h3>
+      <div class="col-2">
+        <div>
+          <h4>Demographics:</h4>
+          <ul>
+            <li><strong>Age:</strong> 42 (Born: 10-07-1983)</li>
+            <li><strong>Gender:</strong> Male</li>
+            <li><strong>Location:</strong> Iasi, Codrescu Campus</li>
+            <li><strong>Occupation:</strong> Engineer at Continental</li>
+            <li><strong>Education:</strong> Master's, Faculty of Computer Science</li>
+            <li><strong>Technology Level:</strong> Advanced</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Psychographics:</h4>
+          <p>Liviu deeply loves his family but, like Elena, occasionally needs to work overtime. During his free time, he takes the family for walks and handles necessary household shopping.</p>
+          
+          <h4>Goals:</h4>
+          <p>Liviu's primary goal is to arrive home on time to spend quality time with his family and relieve his mother from childcare duties.</p>
+          
+          <h4>Frustrations:</h4>
+          <p>Limited time prevents him from fully executing family plans, with shopping taking up valuable time he could spend with his family.</p>
+        </div>
+      </div>
+      <h4>Scenario:</h4>
+      <p>Liviu understands time limitations and agrees with Elena that they're both very busy with work. He needs a solution that minimizes time spent on logistics like shopping while maintaining household quality standards.</p>
+    </div>
+    
+    <div class="persona-card">
+      <h3>Sergiu - The Energetic Child</h3>
+      <div class="col-2">
+        <div>
+          <h4>Demographics:</h4>
+          <ul>
+            <li><strong>Age:</strong> 9 (Born: 16-08-2015)</li>
+            <li><strong>Gender:</strong> Male</li>
+            <li><strong>Location:</strong> Iasi, Codrescu Campus</li>
+            <li><strong>Occupation:</strong> Student</li>
+            <li><strong>School:</strong> Liceul de Informatica, Iasi</li>
+            <li><strong>Technology Level:</strong> Medium</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Psychographics:</h4>
+          <p>Sergiu is a highly energetic child who often develops specific food cravings after school. Until his parents return from work, he's under his grandmother's care, who has limited energy due to her age.</p>
+          
+          <h4>Goals:</h4>
+          <p>Sergiu wants all his desires fulfilled and wishes his parents could spend more time with him rather than on errands like grocery shopping.</p>
+          
+          <h4>Frustrations:</h4>
+          <p>He can't spend enough quality time with his parents because they lose time doing household tasks like shopping.</p>
+        </div>
+      </div>
+      <h4>Scenario:</h4>
+      <p>Sergiu doesn't have the age or permission to help his parents with shopping tasks, but benefits indirectly from solutions that get his parents home faster and with more energy for family activities.</p>
+    </div>
+  </section>
+
+  <section id="storyboards">
+    <h2> Storyboards and User Flows</h2>
+    <p>Storyboards were created to visualize key user interactions with both the mobile and MR components of VRINGO:</p>
+    
+    <div class="img-container">
+      <figure>
+        <img src="storyboard.png" alt="VRINGO Storyboard showing user interaction sequence">
+        <figcaption>Fig 1. VRINGO storyboard illustrating the user journey from initial need identification to product delivery and consumption</figcaption>
+      </figure>
+    </div>
+    
+    <h3> Mobile Application User Flow</h3>
+    <div class="img-container">
+      <figure>
+        <img src="userflow.png" alt="Mobile Application User Flow Diagram">
+        <figcaption>Fig 2. User flow diagram for VRINGO mobile application</figcaption>
+      </figure>
+    </div>
+    <p>The mobile application flow follows these key steps:</p>
+    <ol>
+      <li>User authentication and profile selection</li>
+      <li>Store/merchant selection from available options</li>
+      <li>Category browsing and product search</li>
+      <li>Product selection with real-time inventory verification</li>
+      <li>Cart review with substitution options</li>
+      <li>Shopper assignment and real-time communication</li>
+      <li>Delivery scheduling and tracking</li>
+      <li>Order completion and feedback</li>
+    </ol>
+    
+    <h3>MR Headset Application User Flow</h3>
+    
+    <p>The MR headset application flow comprises:</p>
+    <ol>
+      <li>MR environment initialization and calibration</li>
+      <li>Synchronization with mobile app profile and current shopping session</li>
+      <li>Virtual store navigation through gesture controls</li>
+      <li>Product visualization in 3D with nutritional information overlay</li>
+      <li>Product comparison mode for alternatives</li>
+      <li>Add-to-cart functionality with haptic feedback</li>
+      <li>Virtual shopping list management</li>
+      <li>Handoff to mobile app for checkout and delivery</li>
+    </ol>
+  </section>
+
+  <section id="style-guide">
+    <h2> Style Guide</h2>
+    <p>The VRINGO system follows a consistent style guide across both mobile and MR applications to ensure brand coherence and optimal user experience:</p>
+    
+    <h3>Color Palette</h3>
+    <div class="style-guide">
+      <div>
+        <div class="color-box" style="background-color: #203162; color: white;">#203162</div>
+        <!-- <p>Primary Blue</p> -->
+      </div>
+      <div>
+        <div class="color-box" style="background-color: #86c2f8; color: white;">#86c2f8</div>
+        <!-- <p>Secondary Orange</p> -->
+      </div>
+      <div>
+        <div class="color-box" style="background-color: #ff9d42; color: white;">#ff9d42</div>
+        <!-- <p>Accent Green</p> -->
+      </div>
+      <div>
+        <div class="color-box" style="background-color: #19a28d; color: #333;">#19a28d</div>
+        <!-- <p>Light Background</p> -->
+      </div>
+      <div>
+        <div class="color-box" style="background-color: #333333; color: white;">#333333</div>
+        <!-- <p>Text Dark</p> -->
+      </div>
+      <div>
+        <div class="color-box" style="background-color: #021d4a; color: white;">#021d4a</div>
+        <!-- <p>Text Dark</p> -->
+      </div>
+    </div>
+    
+    <p>The color palette was selected to convey:</p>
+    <ul>
+      <li><strong>Trust and reliability</strong> (Primary Blue) - Essential for shopping applications</li>
+      <li><strong>Energy and enthusiasm</strong> (Secondary Orange) - Creating an engaging shopping experience</li>
+      <li><strong>Freshness and health</strong> (Accent Green) - Reinforcing the focus on quality groceries</li>
+      <li><strong>Clarity and simplicity</strong> (Light Background) - Ensuring readability and clean interface</li>
+    </ul>
+    
+    <h3>Typography</h3>
+    <div class="font-example">
+      <h4 style="font-family: 'Montserrat', sans-serif; margin-bottom: 5px;">Montserrat</h4>
+      <p style="margin-top: 0;">Used for headings and prominent UI elements</p>
+      <div style="font-family: 'Montserrat', sans-serif;">
+        <p style="font-weight: 600;">Montserrat Semi-Bold (600): Primary Headings</p>
+        <p style="font-weight: 500;">Montserrat Medium (500): Secondary Headings</p>
+      </div>
+    </div>
+    
+    <div class="font-example">
+      <h4 style="font-family: 'Roboto', sans-serif; margin-bottom: 5px;">Roboto</h4>
+      <p style="margin-top: 0;">Used for body text and UI elements</p>
+      <div style="font-family: 'Roboto', sans-serif;">
+        <p style="font-weight: 400;">Roboto Regular (400): Body Text</p>
+        <p style="font-weight: 300;">Roboto Light (300): Secondary Text</p>
+      </div>
+    </div>
+    
+    <h3>Icon Style</h3>
+    <p>The icon system uses a consistent flat design with rounded edges, maintaining a 2px stroke width and 24x24px base size. Icons are designed to be legible in both 2D mobile interface and 3D MR environment.</p>
+    
+    
+    <h3>UI Component Style</h3>
+    <p>UI components follow these consistent design principles:</p>
+    <ul>
+      <li><strong>Button style:</strong> Rounded corners (8px radius), clear hover states, consistent padding</li>
+      <li><strong>Card style:</strong> Subtle shadows (2px blur, 30% opacity), rounded corners (12px)</li>
+      <li><strong>Input fields:</strong> Clearly defined with 1px borders, 40px height, and visual feedback states</li>
+      <li><strong>Spacing system:</strong> Based on 8px increments for consistent rhythm across the interface</li>
+    </ul>
+  </section>
+
+  <section id="prototypes">
+    <h2> High-Fidelity Prototypes</h2>
+    
+    <div class="prototype-section">
+      <h3>Mobile Application Prototype</h3>
+      
+      
+      <h4>Key Features:</h4>
+      <ul>
+        <li><strong>Real-time Product Verification:</strong> High-resolution images of actual products before purchase</li>
+        <li><strong>Personal Shopper Communication:</strong> Direct messaging with assigned shoppers for special requests</li>
+        <li><strong>Enhanced Product Information:</strong> Detailed nutritional data, allergen warnings, and sourcing information</li>
+        <li><strong>MR Integration:</strong> Seamless handoff to MR experience for enhanced product visualization</li>
+      </ul>
+    </div>
+    
+    <div class="prototype-section">
+      <h3> MR Headset Application Prototype</h3>
+      
+      <h4>Key Features:</h4>
+      <ul>
+        <li><strong>3D Product Visualization:</strong> Accurate 3D models of grocery products with manipulation capabilities</li>
+        <li><strong>Nutritional Information Overlay:</strong> AR overlay showing key nutritional facts while viewing products</li>
+        <li><strong>Virtual Shopping Environment:</strong> Realistic store simulation for intuitive product browsing</li>
+        <li><strong>Gesture Controls:</strong> Natural hand gestures for selecting, comparing, and adding products to cart</li>
+        <li><strong>Product Comparison:</strong> Side-by-side comparison of multiple products in 3D space</li>
+      </ul>
+    </div>
+    
+    <h3> Video Walkthrough</h3>
+    <p>A comprehensive video walkthrough has been created to demonstrate the functionality of both prototypes, highlighting key user flows and feature interactions.</p>
+  </section>
+
+  <section id="interaction-patterns">
+    <h2> Interaction Design Patterns</h2>
+    
+    <h3> Mobile Application Interaction Patterns</h3>
+    <p>The mobile application employs several established interaction patterns optimized for on-the-go use:</p>
+    
+    <div class="methodology-card">
+      <h4> Card-Based Content Organization</h4>
+      <p>Products and categories are presented in a card-based layout that provides sufficient information while maintaining visual clarity.</p>
+      <p><strong>Design Rationale:</strong> Card layouts allow for scannable content with clear visual hierarchy, supporting users who need to make quick decisions while potentially distracted.</p>
+    </div>
+    
+    <div class="methodology-card">
+      <h4>Progressive Disclosure</h4>
+      <p>Information is revealed progressively as users navigate deeper into the product selection process.</p>
+      <p><strong>Design Rationale:</strong> This prevents cognitive overload for busy parents by showing only what's necessary at each decision point, while making detailed information available on demand.</p>
+    </div>
+    
+    <div class="methodology-card">
+      <h4> Pull-to-Refresh & Infinite Scrolling</h4>
+      <p>Content is refreshed with a pull gesture, and additional products load automatically as users scroll.</p>
+      <p><strong>Design Rationale:</strong> These familiar patterns reduce friction in browsing large catalogs of products while providing clear feedback about content updates.</p>
+    </div>
+    
+    <h3> MR Headset Interaction Patterns</h3>
+    <p>The MR application introduces spatial interaction patterns optimized for the mixed reality environment:</p>
+    
+    <div class="methodology-card">
+      <h4> Spatial Anchoring</h4>
+      <p>UI elements and 3D product models are anchored in physical space, allowing users to interact with them naturally.</p>
+      <p><strong>Design Rationale:</strong> This leverages spatial memory and reduces cognitive load by mimicking real-world shopping behavior.</p>
+    </div>
+    
+    <div class="methodology-card">
+      <h4> Gaze and Gesture Combination</h4>
+      <p>Interaction combines gaze targeting with hand gestures for selection and manipulation.</p>
+      <p><strong>Design Rationale:</strong> This two-step approach prevents accidental interactions while providing natural control over 3D objects.</p>
+    </div>
+    </section>
+    
+    
+    <section id="biblio-references">
+        <h1>References</h1>
+        <ul>
+            <li>http://pxdotpt.com/hci2025</li>
+        </ul>
+    </section>
+</body>
+
+</html>
